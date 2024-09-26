@@ -30,12 +30,13 @@ public class FishFood extends OceanStuff{
     }
 
 //allows the food to collide with the swimming fish. If they collide, the fed counter will go up and a message will be printed to the terminal.
-    void collision(OceanStuff stuff) {
+    void collision(Fish stuff) {
         collide = collides(stuff);
         if(collide) {
             spawn();
             fed++;
             PApplet.println("fish fed: " + fed + ". yummy!!");
+            stuff.flip();
         }
     }
 }
