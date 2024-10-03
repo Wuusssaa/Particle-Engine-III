@@ -66,7 +66,7 @@ public class OceanStuff {
 //to allow the food and fish particles to collide
     boolean collides(OceanStuff stuff) {
         float distance = PApplet.dist(x, y, stuff.getX(), stuff.getY());
-        return (distance < (size/2 + stuff.getSize()/2));
+        return (distance < (size + stuff.getSize()));
     }
 
 //to allow the food to relocate in a random location after colliding with a fish

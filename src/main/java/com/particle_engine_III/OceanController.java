@@ -28,6 +28,15 @@ public class OceanController {
     int seaweedCount = 10; //# of seaweed
     int foodCount = 1; //# of food
 
+
+//the fish and food elements for collision
+
+//all of the ocean elements
+    ArrayList<OceanStuff> oceanStuff;
+
+
+//all of the 
+
 //initializes everything
     OceanController(PApplet main_) {
         main  = main_;
@@ -55,23 +64,8 @@ public class OceanController {
         main.strokeWeight(2); //setting the outline thickness of most elements
         main.noStroke(); //takes away the outlines for some elements
         //draws the fish
-        for(int i = 0; i<fishies.size(); i++){
-            fishies.get(i).draw(); 
-        }
-        main.noFill(); //takes away the fill for the bubbles
-        //draws the bubbles
-        for(int i = 0; i<bubbles.size(); i++){
-            bubbles.get(i).draw(); 
-        }
-        //draws the seaweed
-        for(int i = 0; i<seaweeds.size(); i++){
-            seaweeds.get(i).draw(); 
-        }
-        main.fill(255, 10, 30); //makes sure that the food will be a red
-        main.noStroke(); //takes away the outline
-        //draws the food
-        for(int i = 0; i<foods.size(); i++){
-            foods.get(i).draw(); 
+        for(int i = 0; i<oceanStuff.size(); i++){
+            oceanStuff.get(i).draw(); 
         }
         collisions(); //runs collisions for the food and fish. 
     }
@@ -90,7 +84,10 @@ public class OceanController {
             seaweed = new Seaweed(main, main.random(main.width), main.height, main.random(main.height/2,main.height-40), main.color(main.random(255), main.random(255), main.random(255)));
             seaweeds.add(seaweed);
         }
-        
+        oceanStuff = new ArrayList<>();
+        oceanStuff.addAll(fishies);
+        oceanStuff.addAll(foods);
+        oceanStuff.addAll(seaweeds);    
     }
 
 //adds the bubbles to its array. A random light blue color. In a separate array so we can add more bubbles later with keypressed.
@@ -99,11 +96,13 @@ public class OceanController {
             bubble = new Bubble(main, main.random(main.width), main.random(main.height), main.random(25), bubblesColor);
             bubbles.add(bubble);
         }
+
+        oceanStuff.addAll(bubbles);    
     }
 
 //allows the fish elements on screen to collide with the food element on screen.
     public void collisions() {
-        for(int i=0; i<fishies.size(); i++) {
+        for(int i=0; i<oceanStuff.size(); i++) {
             food.collision(fishies.get(i));
         }
     }
